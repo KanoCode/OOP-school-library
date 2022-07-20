@@ -1,8 +1,8 @@
 class Person
-    def initialize(id,age,parent_permission=true,name="Unknown")
+    def initialize(age,parent_permission=true,name="Unknown")
       @name = name
       @age = age
-      @id =id
+      @id = Random.rand(1..100)
       @parent_permission = parent_permission
     end
     
@@ -43,8 +43,8 @@ class Person
         false
       end
     end 
-    
-  
-    
   end
   
+
+  person1 = Person.new(12)
+  p person1.age
