@@ -1,6 +1,6 @@
 require './decorate'
 
-class Person << Nameable
+class Person < Nameable
   def initialize(age, parent_permission: true, name: 'Unknown')
     @name = name
     @age = age
@@ -18,6 +18,7 @@ class Person << Nameable
       false
     end
   end
+
   def correct_name
     @name
   end
@@ -25,6 +26,7 @@ class Person << Nameable
   def add_rental(book, date)
     Rental.new(date, self, book)
   end
+
   private
 
   def of_age?(age)
