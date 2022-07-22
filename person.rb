@@ -12,7 +12,7 @@ class Person << Nameable
   attr_reader :id
 
   def can_use_services?
-    if is_of_age?(@age) or @parent_permission
+    if of_age?(@age) or @parent_permission
       true
     else
       false
@@ -20,6 +20,10 @@ class Person << Nameable
   end
   def correct_name
     @name
+  end
+
+  def add_rental(book, date)
+    Rental.new(date, self, book)
   end
   private
 
