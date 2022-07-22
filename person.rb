@@ -2,13 +2,15 @@ require './decorate'
 
 class Person < Nameable
   def initialize(age, parent_permission: true, name: 'Unknown')
+    super()
     @name = name
     @age = age
     @id = Random.rand(1..100)
     @parent_permission = parent_permission
+    @rentals = []
   end
 
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :rentals
   attr_reader :id
 
   def can_use_services?
