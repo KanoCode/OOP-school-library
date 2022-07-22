@@ -1,4 +1,6 @@
-class Person
+require './decorate'
+
+class Person << Nameable
   def initialize(age, parent_permission: true, name: 'Unknown')
     @name = name
     @age = age
@@ -16,7 +18,9 @@ class Person
       false
     end
   end
-
+  def correct_name
+    @name
+  end
   private
 
   def of_age?(age)
