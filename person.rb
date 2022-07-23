@@ -1,24 +1,28 @@
 require './decorate'
-
+require './rental'
+require './book'
 class Person < Nameable
-  def initialize(age, parent_permission: true, name: 'Unknown')
+  attr_reader :id
+  attr_accessor :name, :age, :rentals
+
+  INITIAL_PERMISSION = true
+  def initialize(age, name = 'unknown', parent_permission = INITIAL_PERMISSION)
     super()
-    @name = name
+    @id = Random.rand(1..1000)
     @age = age
-    @id = Random.rand(1..100)
+    @name = name
     @parent_permission = parent_permission
     @rentals = []
   end
 
-  attr_accessor :name, :age, :rentals
-  attr_reader :id
+  def of_age?
+    true if @age >= 18
+  end
+
+  private :of_age?
 
   def can_use_services?
-    if of_age?(@age) or @parent_permission
-      true
-    else
-      false
-    end
+    true if of_age? or @parent_permission
   end
 
   def correct_name
@@ -26,12 +30,6 @@ class Person < Nameable
   end
 
   def add_rental(book, date)
-    Rental.new(date, self, book)
-  end
-
-  private
-
-  def of_age?(age)
-    age >= 18
+    Rental.new(date, book, self)
   end
 end
